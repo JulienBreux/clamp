@@ -1,0 +1,61 @@
+project_name: clamp
+before:
+  hooks:
+    - go mod download
+    - go generate ./...
+release:
+  prerelease: true
+builds:
+  - env:
+      - CGO_ENABLED=0
+    goos:
+      - linux
+      - darwin
+      - windows
+    goarch:
+      - 386
+      - amd64
+      - arm
+      - arm64
+    goarm:
+      - 6
+      - 7
+    ldflags:
+      - -s -w -X github.com/julienbreux/clamp/cmd.version={{.Version}} -X github.com/julienbreux/clamp/cmd.commit={{.Commit}} -X github.com/julienbreux/clamp/cmd.date={{.Date}}
+archives:
+  - id: clamp
+    replacements:
+      darwin: Darwin
+      linux: Linux
+      windows: Windows
+      bit: Arm
+      bitv6: Arm6
+      bitv7: Arm7
+      386: i386
+      amd64: x86_64
+checksum:
+  name_template: "checksums.txt"
+snapshot:
+  name_template: "{{ .Tag }}-next"
+changelog:
+  sort: asc
+  filters:
+    exclude:
+      - "^docs:"
+      - "^test:"
+
+# Homebrew
+brews:
+  -
+    name: clamp
+    github:
+      owner: JulienBreux
+      name: homebrew-clamp
+    commit_author:
+      name: Julien Breux
+      email: julien.breux@gmail.com
+    folder: Formula
+    homepage: https://julienbreux.github.io/clamp/
+    description: Clamp is a useful tool to help to replace environment variables in any file using go template syntax.
+    test: |
+      system "clamp -v"

@@ -1,6 +1,6 @@
 # 🗜 Clamp
 
-🗜 Clamp is useful to replace environment variables in any file using go template syntax
+🗜 Clamp is a useful tool to help to replace environment variables in any file using go template syntax.
 
 ## How to use from pipe
 
