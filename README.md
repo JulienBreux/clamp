@@ -9,6 +9,6 @@
 
 ## How to use from file
 
-    echo "{{ .USER }}" > test.txt
-    clamp test.txt
+    echo "{{ .HOME }}" > home.txt
+    clamp home.txt
     # /Users/julienbreux
