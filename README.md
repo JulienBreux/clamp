@@ -1,5 +1,11 @@
 # 🗜 Clamp
 
+[![Actions Status](https://github.com/JulienBreux/clamp/workflows/Build%20and%20test%20Go/badge.svg)](https://github.com/JulienBreux/clamp/actions)
+[![Go Report Card](https://goreportcard.com/badge/github.com/JulienBreux/clamp)](https://goreportcard.com/report/github.com/JulienBreux/clamp)
+[![codebeat badge](https://codebeat.co/badges/2730cae5-0cf6-43f7-a04d-2163b5902013)](https://codebeat.co/projects/github-com-julienbreux-clamp-master)
+[![GitHub tag](https://img.shields.io/github/tag/JulienBreux/clamp.svg)](Tag)
+[![Go version](https://img.shields.io/github/go-mod/go-version/JulienBreux/clamp)](https://golang.org/dl/#stable)
+
 Clamp is a useful tool to help to replace environment variables in any file using go template syntax.
 
 ---
