@@ -7,6 +7,8 @@ import (
 	"os"
 	"strings"
 	"text/template"
+
+	"github.com/Masterminds/sprig"
 )
 
 var (
@@ -61,7 +63,7 @@ func input() {
 }
 
 func transform(data []byte) error {
-	tmpl, err := template.New("default").Parse(string(data))
+	tmpl, err := template.New("default").Funcs(sprig.HermeticTxtFuncMap()).Parse(string(data))
 	if err != nil {
 		return err
 	}
