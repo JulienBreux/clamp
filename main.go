@@ -63,7 +63,11 @@ func input() {
 }
 
 func transform(data []byte) error {
-	tmpl, err := template.New("default").Funcs(sprig.HermeticTxtFuncMap()).Parse(string(data))
+	tmpl, err := template.New("default").
+		Option("missingkey=zero").
+		Funcs(sprig.HermeticTxtFuncMap()).
+		Parse(string(data))
+
 	if err != nil {
 		return err
 	}
