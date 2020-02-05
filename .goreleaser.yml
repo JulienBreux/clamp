@@ -19,7 +19,6 @@ builds:
       - -s -w -X github.com/julienbreux/clamp/cmd.version={{.Version}} -X github.com/julienbreux/clamp/cmd.commit={{.Commit}} -X github.com/julienbreux/clamp/cmd.date={{.Date}}
 archives:
   - id: clamp
-    name_template: "{{.Binary}}_{{.Os}}_{{.Arch}}"
     format_overrides:
       - goos: windows
         format: zip
