@@ -48,6 +48,12 @@ Clamp is available on Linux, OSX and Windows platforms.
 
 ---
 
+## 🌎 Availability
+
+* [NPM](https://www.npmjs.com/package/@julienbreux/clamp)
+
+---
+
 ## 📘 Help
 
 ### How to use from pipe
