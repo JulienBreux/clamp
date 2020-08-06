@@ -22,5 +22,5 @@ func Print() {
 
 // Fprint writes Clamp's version information to w.
 func Fprint(w io.Writer) {
-	fmt.Fprint(w, "Clamp version %s build %s (at %s)\n", Version, Commit, Date)
+	fmt.Fprintf(w, "Clamp version %s build %s (at %s)\n", Version, Commit, Date)
 }
