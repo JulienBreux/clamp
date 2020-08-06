@@ -28,7 +28,14 @@ func main() {
 		return
 	}
 
+	if err := run(); err != nil {
+		fmt.Fprintf(os.Stderr, "%s", err.Error())
+	}
+}
+
+func run() error {
 	input()
+	return nil
 }
 
 func input() {
