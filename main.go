@@ -9,14 +9,11 @@ import (
 	"text/template"
 
 	"github.com/Masterminds/sprig"
+	"github.com/julienbreux/clamp/version"
 )
 
 var (
 	showVersion = false
-
-	version = "dev"
-	commit  = "n/a"
-	date    = "n/a"
 )
 
 func init() {
@@ -91,7 +88,7 @@ func check(e error) {
 }
 
 func printVersion() {
-	fmt.Printf("Clamp version %s build %s (at %s)\n", version, commit, date)
+	fmt.Printf("Clamp version %s build %s (at %s)\n", version.Version, version.Commit, version.Date)
 
 	os.Exit(0)
 }

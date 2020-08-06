@@ -16,7 +16,7 @@ builds:
       - 386
       - amd64
     ldflags:
-      - -s -w -X github.com/julienbreux/clamp/cmd.version={{.Version}} -X github.com/julienbreux/clamp/cmd.commit={{.Commit}} -X github.com/julienbreux/clamp/cmd.date={{.Date}}
+      - -s -w -X github.com/julienbreux/clamp/version.Version={{.Version}} -X github.com/julienbreux/clamp/version.Commit={{.Commit}} -X github.com/julienbreux/clamp/version.Date={{.Date}}
 archives:
   - id: clamp
     format_overrides:
