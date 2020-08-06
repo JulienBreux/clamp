@@ -41,6 +41,7 @@ func run() error {
 	if err != nil {
 		return err
 	}
+	defer in.Close()
 
 	var buf bytes.Buffer
 	if err := transform(&buf, in, envVars()); err != nil {
@@ -54,7 +55,7 @@ func run() error {
 	return nil
 }
 
-func input() (io.Reader, error) {
+func input() (*os.File, error) {
 	switch flag.NArg() {
 	case 0:
 		return os.Stdin, nil
