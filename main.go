@@ -12,6 +12,7 @@ import (
 	"text/template"
 
 	"github.com/Masterminds/sprig"
+	"github.com/julienbreux/clamp/functions"
 	"github.com/julienbreux/clamp/version"
 )
 
@@ -32,7 +33,7 @@ func main() {
 	}
 
 	if err := run(); err != nil {
-		fmt.Fprintf(os.Stderr, "clamp: %s", err.Error())
+		fmt.Fprintf(os.Stderr, "clamp: %s\n", err.Error())
 	}
 }
 
@@ -80,8 +81,8 @@ func transform(w io.Writer, r io.Reader, vars map[string]string) error {
 	tmpl, err := template.New("default").
 		Option("missingkey=zero").
 		Funcs(sprig.HermeticTxtFuncMap()).
+		Funcs(functions.Map()).
 		Parse(string(data))
-
 	if err != nil {
 		return err
 	}
