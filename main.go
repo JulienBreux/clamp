@@ -24,7 +24,8 @@ func main() {
 	flag.Parse()
 
 	if showVersion {
-		printVersion()
+		version.Print()
+		return
 	}
 
 	input()
@@ -85,12 +86,6 @@ func check(e error) {
 	if e != nil {
 		panic(e)
 	}
-}
-
-func printVersion() {
-	fmt.Printf("Clamp version %s build %s (at %s)\n", version.Version, version.Commit, version.Date)
-
-	os.Exit(0)
 }
 
 func printInputErrorMessage() {
