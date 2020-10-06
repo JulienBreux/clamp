@@ -38,16 +38,12 @@ func TestRequired(t *testing.T) {
 			}
 
 			switch {
-			case err == nil && !test.expectErr:
-				// No error expected, no error returned 👌
 			case err == nil && test.expectErr:
 				t.Errorf("expected error, got none")
 			case err != nil && !test.expectErr:
 				t.Errorf("unexpected error: %s", err.Error())
-			case err != nil && test.expectErr:
-				if !strings.Contains(err.Error(), test.msg) {
-					t.Errorf("error should contain message")
-				}
+			case err != nil && test.expectErr && !strings.Contains(err.Error(), test.msg):
+				t.Errorf("error should contain message")
 			}
 		})
 	}
