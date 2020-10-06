@@ -24,6 +24,18 @@ func TestTransform(t *testing.T) {
 			output:    `FOO=BAR, BAZ=`,
 			expectErr: false,
 		},
+		"required-and-present": {
+			vars:      map[string]string{"FOO": "BAR", "BAZ": "QLUX"},
+			input:     `FOO={{ .FOO }}, BAZ={{ required "BAZ must be set" .BAZ }}`,
+			output:    `FOO=BAR, BAZ=QLUX`,
+			expectErr: false,
+		},
+		"required-and-missing": {
+			vars:      map[string]string{"FOO": "BAR"},
+			input:     `FOO={{ .FOO }}, BAZ={{ required "BAZ must be set" .BAZ }}`,
+			output:    `FOO=BAR, BAZ=`,
+			expectErr: true,
+		},
 	}
 
 	for name, test := range tests {

@@ -6,5 +6,7 @@ import "text/template"
 func Map() template.FuncMap {
 	fm := make(template.FuncMap)
 
+	fm["required"] = required
+
 	return fm
 }
