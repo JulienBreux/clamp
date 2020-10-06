@@ -46,14 +46,10 @@ func TestTransform(t *testing.T) {
 			err := transform(&out, &in, test.vars)
 
 			switch {
-			case err == nil && !test.expectErr:
-				// No error expected, no error returned 👌
 			case err == nil && test.expectErr:
 				t.Errorf("expected error, got none")
 			case err != nil && !test.expectErr:
 				t.Errorf("unexpected error: %s", err.Error())
-			case err != nil && test.expectErr:
-				// Expected error, got one 👌
 			}
 
 			actual := out.String()
