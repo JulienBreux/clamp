@@ -12,6 +12,7 @@ import (
 	"text/template"
 
 	"github.com/Masterminds/sprig"
+	"github.com/julienbreux/clamp/functions"
 )
 
 var (
@@ -83,6 +84,7 @@ func transform(w io.Writer, r io.Reader, vars map[string]string) error {
 	tmpl, err := template.New("default").
 		Option("missingkey=zero").
 		Funcs(sprig.HermeticTxtFuncMap()).
+		Funcs(functions.Map()).
 		Parse(string(data))
 	if err != nil {
 		return err
