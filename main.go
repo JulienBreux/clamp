@@ -36,6 +36,7 @@ func main() {
 
 	if err := run(); err != nil {
 		fmt.Fprintf(os.Stderr, "clamp: %s\n", err.Error())
+		os.Exit(1)
 	}
 }
 
