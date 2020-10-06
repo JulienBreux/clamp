@@ -1,8 +1,11 @@
 package main
 
 import (
+	"bytes"
+	"errors"
 	"flag"
 	"fmt"
+	"io"
 	"io/ioutil"
 	"os"
 	"strings"
@@ -30,49 +33,62 @@ func main() {
 		printVersion()
 	}
 
-	input()
-}
-
-func input() {
-	var data []byte
-	var err error
-
-	switch flag.NArg() {
-	case 0:
-		file := os.Stdin
-		fi, err := file.Stat()
-		check(err)
-		if fi.Size() == 0 {
-			printInputErrorMessage()
-		}
-
-		data, err = ioutil.ReadAll(os.Stdin)
-		check(err)
-		err = transform(data)
-		check(err)
-		break
-	case 1:
-		data, err = ioutil.ReadFile(flag.Arg(0))
-		check(err)
-		err = transform(data)
-		check(err)
-		break
-	default:
-		printInputErrorMessage()
+	if err := run(); err != nil {
+		fmt.Fprintf(os.Stderr, "clamp: %s\n", err.Error())
 	}
 }
 
-func transform(data []byte) error {
+func run() error {
+	in, err := input()
+	if err != nil {
+		return err
+	}
+	defer in.Close()
+
+	var buf bytes.Buffer
+	if err := transform(&buf, in, envVars()); err != nil {
+		return fmt.Errorf("could not render: %w", err)
+	}
+
+	if _, err := io.Copy(os.Stdout, &buf); err != nil {
+		return fmt.Errorf("could not print: %w", err)
+	}
+
+	return nil
+}
+
+func input() (*os.File, error) {
+
+	switch flag.NArg() {
+	case 0:
+		return os.Stdin, nil
+	case 1:
+		filename := flag.Arg(0)
+		f, err := os.Open(filename)
+		if err != nil {
+			return nil, fmt.Errorf("unable to open %q: %w", filename, err)
+		}
+		return f, nil
+	default:
+		return nil, errors.New("incorrect usage: too many arguments")
+	}
+}
+
+func transform(w io.Writer, r io.Reader, vars map[string]string) error {
+	data, err := ioutil.ReadAll(r)
+	if err != nil {
+		return fmt.Errorf("input is unreadable: %w", err)
+	}
+
 	tmpl, err := template.New("default").
 		Option("missingkey=zero").
 		Funcs(sprig.HermeticTxtFuncMap()).
 		Parse(string(data))
-
 	if err != nil {
 		return err
 	}
 
-	return tmpl.Execute(os.Stdout, envVars())
+	return tmpl.Execute(w, vars)
 }
 
 func envVars() map[string]string {
@@ -84,20 +100,8 @@ func envVars() map[string]string {
 	return vars
 }
 
-func check(e error) {
-	if e != nil {
-		panic(e)
-	}
-}
-
 func printVersion() {
 	fmt.Printf("Clamp version %s build %s (at %s)\n", version, commit, date)
 
 	os.Exit(0)
-}
-
-func printInputErrorMessage() {
-	fmt.Printf("Input must be from stdin or file and non empty\n")
-
-	os.Exit(1)
 }
