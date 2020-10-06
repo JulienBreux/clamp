@@ -13,14 +13,11 @@ import (
 
 	"github.com/Masterminds/sprig"
 	"github.com/julienbreux/clamp/functions"
+	"github.com/julienbreux/clamp/version"
 )
 
 var (
 	showVersion = false
-
-	version = "dev"
-	commit  = "n/a"
-	date    = "n/a"
 )
 
 func init() {
@@ -31,7 +28,8 @@ func main() {
 	flag.Parse()
 
 	if showVersion {
-		printVersion()
+		version.Print()
+		return
 	}
 
 	if err := run(); err != nil {
@@ -100,10 +98,4 @@ func envVars() map[string]string {
 		vars[pair[0]] = pair[1]
 	}
 	return vars
-}
-
-func printVersion() {
-	fmt.Printf("Clamp version %s build %s (at %s)\n", version, commit, date)
-
-	os.Exit(0)
 }
