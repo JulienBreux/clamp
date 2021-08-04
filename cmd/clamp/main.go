@@ -12,7 +12,7 @@ import (
 	"text/template"
 
 	"github.com/Masterminds/sprig"
-	"github.com/julienbreux/clamp/functions"
+	"github.com/julienbreux/clamp/internal/functions"
 )
 
 var (
