@@ -10,6 +10,51 @@ Clamp is a useful tool to help to replace environment variables in any file usin
 
 ---
 
+## 📘 Help
+
+### How to use from pipe
+
+Locally:
+
+```bash
+echo "{{ .USER }}" | clamp
+# JulienBreux
+```
+
+From Docker:
+
+```bash
+echo "{{ .USER }}" | docker run -i -e USER=$USER --rm --name clamp julienbreux/clamp:latest
+# JulienBreux
+```
+
+### How to use from file
+
+Locally:
+
+```bash
+echo "{{ .HOME }}" > home.txt
+clamp home.txt
+# /Users/julienbreux
+```
+
+From Docker:
+
+```bash
+echo "{{ .HOME }}" > home.txt
+docker run \
+    -i \
+    -e HOME=$HOME \
+    --rm \
+    --name clamp \
+    -v $PWD/home.txt:/home.txt \
+    julienbreux/clamp:latest \
+    home.txt
+# /Users/julienbreux
+```
+
+---
+
 ## 🔧 Installation
 
 Clamp is available on Linux, OSX and Windows platforms.
@@ -45,25 +90,6 @@ Clamp is available on Linux, OSX and Windows platforms.
         ```shell
         ./clamp
         ```
-
----
-
-## 📘 Help
-
-### How to use from pipe
-
-```bash
-echo "{{ .USER }}" | clamp
-# JulienBreux
-```
-
-### How to use from file
-
-```bash
-echo "{{ .HOME }}" > home.txt
-clamp home.txt
-# /Users/julienbreux
-```
 
 ---
 
