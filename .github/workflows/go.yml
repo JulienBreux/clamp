@@ -20,7 +20,7 @@ jobs:
       - name: Build
         env:
           GOPROXY: "https://proxy.golang.org"
-        run: go build .
+        run: go build ./cmd/clamp/
 
       # - name: Test
       #   env:
