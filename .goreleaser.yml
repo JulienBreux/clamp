@@ -37,7 +37,7 @@ dockers:
       - 'ghcr.io/julienbreux/clamp:{{ .Tag }}'
       - 'ghcr.io/julienbreux/clamp:latest'
     dockerfile: Dockerfile
-    use_buildx: true
+    use: buildx
     build_flag_templates:
       - --pull
       - --platform=linux/amd64
