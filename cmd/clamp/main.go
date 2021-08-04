@@ -23,11 +23,8 @@ var (
 	date    = "n/a"
 )
 
-func init() {
-	flag.BoolVar(&showVersion, "v", false, "Print version information and quit")
-}
-
 func main() {
+	flag.BoolVar(&showVersion, "v", false, "Print version information and quit")
 	flag.Parse()
 
 	if showVersion {
@@ -60,7 +57,6 @@ func run() error {
 }
 
 func input() (*os.File, error) {
-
 	switch flag.NArg() {
 	case 0:
 		return os.Stdin, nil
