@@ -1,0 +1,7 @@
+.github
+.codebeatsettings
+.golangci.yml
+.goreleaser.yml
+LICENSE
+Makefile
+README.md
