@@ -1,4 +1,4 @@
-# 🗜 Clamp
+# 🗜 Clamp — Replace environment variables in any file using go template syntax
 
 [![Actions Status](https://github.com/JulienBreux/clamp/workflows/Build%20and%20test%20Go/badge.svg)](https://github.com/JulienBreux/clamp/actions)
 [![Go Report Card](https://goreportcard.com/badge/github.com/JulienBreux/clamp)](https://goreportcard.com/report/github.com/JulienBreux/clamp)

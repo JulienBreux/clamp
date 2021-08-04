@@ -1,6 +1,8 @@
-name: Build and test Go
+name: Builds and tests Go
 
-on: [push, pull_request]
+on:
+  - push
+  - pull_request
 
 jobs:
   build:
@@ -9,20 +11,20 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Set up Go 1.14
+      - name: Set up Go 1.16
         uses: actions/setup-go@v1
         with:
-          go-version: 1.14
+          go-version: 1.16
 
       - name: Check out source code
-        uses: actions/checkout@v1
+        uses: actions/checkout@v2
 
       - name: Build
         env:
-          GOPROXY: "https://proxy.golang.org"
-        run: go build ./cmd/clamp/
+          GOPROXY: https://proxy.golang.org
+        run: make build
 
-      # - name: Test
-      #   env:
-      #     GOPROXY: "https://proxy.golang.org"
-      #   run: go test -v .
+      - name: Test
+        env:
+          GOPROXY: https://proxy.golang.org
+        run: make test
